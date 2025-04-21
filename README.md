@@ -1,6 +1,6 @@
 # 🧠 Codeforces Problem Solutions
 
-This repository contains my personal solutions to various **Codeforces** problems.  
+This repository contains my personal solutions to various **Codeforces** + **AtCoder** problems.  
 Each file is named after the problem (e.g., `CommonMultiple.py`, `DrawSq.py`) and contains my implementation from contests or practice.
 
 ---

@@ -15,3 +15,4 @@ for _ in range(t):
         extra = sum(b[:k-1])
  
     print(total + extra + 1)
+

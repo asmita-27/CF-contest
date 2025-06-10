@@ -8,19 +8,18 @@ for _ in range(int(input())):
     pass
     n, x = map(int, input().split())
     a = list(map(int, input().split()))
-    c,d = -1,-1
-    for i in range(n):
-        if a[i]==1:
-            c=i
+    ans = True
+    first = True
+    i =0 
+    while i <n:
+        if not first and a[i] == 1:
+            ans = False
             break
-    for i in range(n-1,-1,-1):
-        if a[i]==1:
-            d=i
-            break
-    if c==d:
+        if first and a[i] == 1:
+            i = i+ x - 1
+            first = False
+        i+=1
+    if   ans:
         print("YES")
     else:
-        if d-c+1>x:
-            print("NO")
-        else:
-            print("YES")
+        print("NO")

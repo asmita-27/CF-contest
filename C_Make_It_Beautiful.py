@@ -5,7 +5,7 @@ import sys
 
 
 for _ in range(int(input())):
-    pass
+
     n , k = map(int, input().split())
     a = list(map(int, input().split()))
     ans = 0
@@ -15,5 +15,5 @@ for _ in range(int(input())):
             if i%2==0:
                 i+=1
                 k-=1
-    ans = sum(i.bit_count() for i in a)
+            ans += i.bit_count()
     print(ans)

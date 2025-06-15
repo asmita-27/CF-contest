@@ -7,23 +7,23 @@ import sys
 for _ in range(int(input())):
     k,a,b,x,y = map(int, input().split())
     ans = 0
-    minn, rem , other = 0, 0, 0
+    minn, rem , var = 0, 0, 0
     
     if x>= y:
         minn = y
         rem = k - b
-        other = b
+        var = b
     else:
         minn = x
         rem = k - a
-        other = a
-    if rem>= 0:
+        var = a
+    if rem>= 0: 
         ans = rem//minn +1
-        k -= (ans-1)*minn
-        k -= minn
+        k -= (ans )*minn
+        
     else:
         ans = 0
-    if other ==a:
+    if var ==a:
         if k >= b:
             rem2 = k - b
             ans += rem2 // y + 1

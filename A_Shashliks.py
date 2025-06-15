@@ -7,25 +7,29 @@ import sys
 for _ in range(int(input())):
     k,a,b,x,y = map(int, input().split())
     ans = 0
+    minn, rem , other = 0, 0, 0
     
-    
-    if x<y:
-        if k>=a:
-            k1 = (k-a)//x+1
-            ans += k1
-            k -= k1*x
-        if k>=b:
-            k2 = (k-b)//y+1
-            ans += k2
-            k -= k2*y
+    if x>= y:
+        minn = y
+        rem = k - b
+        other = b
     else:
-        if k>=b:
-            k1 = (k-b)//y+1
-            ans += k1
-            k -= k1*y
-        if k>=a:
-            k2 = (k-a)//x+1
-            ans += k2
-            k -= k2*x
+        minn = x
+        rem = k - a
+        other = a
+    if rem>= 0:
+        ans = rem//minn +1
+        k -= (ans-1)*minn
+        k -= minn
+    else:
+        ans = 0
+    if other ==a:
+        if k >= b:
+            rem2 = k - b
+            ans += rem2 // y + 1
+    else:
+        if k >= a:
+            rem2 = k - a
+            ans += rem2 // x + 1
+                
     print(ans)
-            

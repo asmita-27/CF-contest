@@ -7,19 +7,16 @@ import sys
 for _ in range(int(input())):
     n,k = map(int, input().split())
     a = list(map(int, input().split()))
+    a.sort()
+    pre = [0] * (n + 1)
+ 
+    for i in range(n):
+        pre[i + 1] = pre[i] + a[i]
+ 
+    ans =0 
     
-    ans = sum(a)
-    while k > 0:
-        a.sort()
-        if a[0]+a[1]<= a[-1] or a[-1] > ans:
-            ans -= (a[0] + a[1])
-            a.pop(0)
-            a.pop(0)
-        elif a[0]+a[1]>a[-1] or a[-1]<=ans:
-            ans -= a[-1]
-            a.pop()
-            
-        k -= 1
-
+    for i in range(k + 1):
+        ans = max(ans, pre[n-(k-i)] - pre[2*i])
+ 
     print(ans)
-
+ 

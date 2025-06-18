@@ -6,27 +6,25 @@ import sys
  
 for _ in range(int(input())):
     n = int(input())
-    v = list(map(int, input().split()))
+    a = list(map(int, input().split()))
     s = set()
-    st = []
-    mx = v[0]
-    st.append(v[0])
-    
-    for i in range(1, n):
-        if v[i] in s:
-            mx = 0
-            while st:
-                s.add(st.pop())
-        elif v[i] < mx:
-            while st:
-                s.add(st.pop())
-            if v[i] in s:
-                mx = 0
+    stk = []
+    maxx = a[0]
+    stk.append(a[0])
+    for i in range(n):
+        if a[i] in s:
+            maxx =0
+            while stk:
+                s.add(stk.pop())
+        elif a[i]<maxx:
+            while stk:
+                s.add(stk.pop())
+            if a[i] not in s:
+                maxx = a[i]
+                stk.append(a[i])
             else:
-                st.append(v[i])
-                mx = v[i]
+                maxx = 0
         else:
-            mx = v[i]
-            st.append(v[i])
-    
+            stk.append(a[i])
+            maxx = a[i]
     print(len(s))

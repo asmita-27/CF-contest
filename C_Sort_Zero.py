@@ -3,17 +3,30 @@ import os
 import math
 import sys
 
-
+ 
 for _ in range(int(input())):
-    pass
     n = int(input())
-    a = list(map(int,input().split()))
-    cnt = Counter(a)
-    ans = 0
-    for i in a:
-        a.sort()
-        if i in cnt and cnt[i]>=1:
-            ans += 1
-            a.remove(i)
-
-    print(ans)
+    v = list(map(int, input().split()))
+    s = set()
+    st = []
+    mx = v[0]
+    st.append(v[0])
+    
+    for i in range(1, n):
+        if v[i] in s:
+            mx = 0
+            while st:
+                s.add(st.pop())
+        elif v[i] < mx:
+            while st:
+                s.add(st.pop())
+            if v[i] in s:
+                mx = 0
+            else:
+                st.append(v[i])
+                mx = v[i]
+        else:
+            mx = v[i]
+            st.append(v[i])
+    
+    print(len(s))

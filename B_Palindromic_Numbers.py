@@ -9,12 +9,10 @@ for _ in range(int(input())):
     n = int(input())
     s = input()
     
-    if s[0] == '9':
-        num = '1'*(n+1)
-        ans =str(int(num) - int(s))
-    else:
-        num = '9'*n
-        ans = ''.join(str(9-int(x))for x in s)
-
+    if s[0] != '9': 
+        ans = ''.join(str(9 - int(ch)) for ch in s)
+    else: 
+        t = '1' * (n + 1)
+        x = int(t) - int(s)
+        ans = str(x).zfill(n)  
     print(ans)
- 

@@ -9,10 +9,11 @@ for _ in range(int(input())):
     ans = 0
 
     for _ in range(n):
-        dx, dy, xi, yi = map(int, input().split())
-        if dx == dy:
-            ans += (xi == yi)
-        else:
-            ans += (xi + yi == s)
-
+        a,b,c,d = map(int, input().split())
+        if a==b and c==d:
+            ans +=1
+        elif c+d == s :
+            if (a==1 and b==-1) or (a==-1 and b==1):
+                ans += 1
     print(ans)
+                

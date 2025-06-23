@@ -11,7 +11,7 @@ for _ in range(int(input())):
     flg = 0
     if n%2==0 and k%2==1:
         flg = 1
-    if k>n//2:
+    if k*k >n:
         flg = 1
     
     if flg :

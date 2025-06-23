@@ -8,15 +8,7 @@ for _ in range(int(input())):
     pass
     n,k = map(int, input().split())
     
-    flg = 0
-    if n%2==0 and k%2==1:
-        flg = 1
-    if k*k >n:
-        flg = 1
-    
-    if flg :
-        print("NO")
-    else:
+    if n % 2 == k%2 and n >= k * k:
         print("YES")
-    
-    
+    else:
+        print("NO")

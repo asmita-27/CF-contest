@@ -6,5 +6,17 @@ import sys
 
 for _ in range(int(input())):
     pass
-    n = int(input())
-
+    n,k = map(int, input().split())
+    
+    flg = 0
+    if n%2==0 and k%2==1:
+        flg = 1
+    if k>n//2:
+        flg = 1
+    
+    if flg :
+        print("NO")
+    else:
+        print("YES")
+    
+    

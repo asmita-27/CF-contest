@@ -1,19 +1,12 @@
-def minOp(n):
-    if '7' in str(n):
-        return 0
-    
-    count = 0
-    add_val = 9
-    while '7' not in str(n):
-        n += add_val
-        count += 1
-    return count
+from collections import defaultdict, Counter, deque
+import os
+import math
+import sys
 
-def solve():
-    t = int(input())
-    results = []
-    for _ in range(t):
-        n = int(input())
-        results.append(str(minOp(n)))
-    print("\n".join(results))
-solve()
+
+for _ in range(int(input())):
+    pass
+    a,b,c= map(int, input().split())
+    
+    print("1" + "0" * (a - 1), "1" * (b - c + 1) + "0" * (c - 1))
+

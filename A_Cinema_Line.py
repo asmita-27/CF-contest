@@ -2,39 +2,37 @@ from collections import defaultdict, Counter, deque
 import os
 import math
 import sys
+def main():
+    n = int(input())
+    arr = list(map(int, input().split()))
 
-n = int(input())
-a = list(map(int, input().split()))
+    l25 = 0
+    l50 = 0
 
-flg  = 0
-cnt = a[0]
-for i in range(1, n):
-    if a[0]!=25:
-        flg = 1
-        continue
-    if a[i] == 25:
-        cnt += 25
-    elif a[i] == 50  :
-        if cnt < 25:
-            flg = 1
-            continue
-        cnt -= 25
-        cnt += 50
-    elif a[i] == 100:
-        if cnt < 75:
-            flg = 1
-            continue
-        if cnt >= 75:
-            cnt -= 75
-            cnt += 100
-        else:
-            cnt -= 25
+    for bill in arr:
+        if bill == 25:
+            l25 += 1
+        elif bill == 50:
+            if l25 >= 1:
+                l50 += 1
+                l25 -= 1
+            else:
+                print("NO")
+                return
+        elif bill == 100:
+            if l50 >= 1 and l25 >= 1:
+                l50 -= 1
+                l25 -= 1
+            elif l25 >= 3:
+                l25 -= 3
+            else:
+                print("NO")
+                return
 
-if flg:
-    print("NO")
-else:
     print("YES")
-    
 
 
 
+
+if __name__ == "__main__": 
+    main()

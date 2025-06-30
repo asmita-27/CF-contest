@@ -10,6 +10,6 @@ for _ in range(int(input())):
     g = 0
     for i in range(n):
         g = math.gcd(g, abs(a[i]-a[n-i-1]))
-        
+
     print(g)
 

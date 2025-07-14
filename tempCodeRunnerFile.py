@@ -5,8 +5,22 @@ import sys
 
 
 for _ in range(int(input())):
-    pass
-    a,b,c= map(int, input().split())
-    
-    print("1" + "0" * (a - 1), "1" * (b - c + 1) + "0" * (c - 1))
+    n = int(input())
+    a = list(map(int, input().split()))
 
+    cnt = Counter(a)
+    b = set()
+    
+    for num in a:
+        b.add(num)
+        b.add(num + 1)
+
+    last = 0
+    res = 0
+
+    for x in sorted(b):
+        c = cnt.get(x, 0)
+        res += max(0, c - last)
+        last = c
+
+    print(res)

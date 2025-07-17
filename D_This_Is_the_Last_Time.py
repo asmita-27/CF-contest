@@ -1,31 +1,32 @@
-from collections import defaultdict, Counter, deque
-import os
-import math
-import sys
+import heapq
 
-
-for _ in range(int(input())):
-    n,k = map(int, input().split())
-    cas = []
-    for  _ in range(n):
-        l,r,real = map(int, input().split())
-        cas.append((l, r, real))
-    vis = [0]*n
-    curr = k
-    while True:
-        best  =-1
-        bestIndex = -1
-
-        for i in range(n):
-            if not vis[i]:
-                l,r,real = cas[i]
-                if l<=curr<=r:
-                    if real>best:
-                        best = real
-                        bestIndex = i
-        if bestIndex == -1:
-            break
-        vis[bestIndex] = 1
-        curr = best
-    print(curr)
+t = int(input())
+for _ in range(t):
+    n, k = map(int, input().split())
+    casinos = []
+    for _ in range(n):
+        l, r, reali = map(int, input().split())
+        casinos.append((l, r, reali))
     
+    casinos.sort()  
+    heap = []
+    index = 0
+    curr = k
+
+    while True:
+        while index < n and casinos[index][0] <= curr:
+            l, r, reali = casinos[index]
+            if curr <= r:
+                heapq.heappush(heap, (-reali, r))             
+            index += 1
+        
+        while heap and heap[0][1] < curr:
+            heapq.heappop(heap)
+        
+        if not heap:
+            break
+        
+        reali, _ = heapq.heappop(heap)
+        curr = -reali
+
+    print(curr)

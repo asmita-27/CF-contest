@@ -1,32 +1,32 @@
+
 import heapq
 
-t = int(input())
-for _ in range(t):
+
+ 
+ 
+for _ in range(int(input())):
     n, k = map(int, input().split())
-    casinos = []
-    for _ in range(n):
-        l, r, reali = map(int, input().split())
-        casinos.append((l, r, reali))
+    cas = [tuple(map(int, input().split())) for _ in range(n)] 
+    cas.sort(key=lambda x: x[0])
     
-    casinos.sort()  
-    heap = []
-    index = 0
-    curr = k
-
-    while True:
-        while index < n and casinos[index][0] <= curr:
-            l, r, reali = casinos[index]
-            if curr <= r:
-                heapq.heappush(heap, (-reali, r))             
-            index += 1
+    x = k
+    i = 0
+    maxHeap = []   
+    while True: 
+        while i < n and cas[i][0] <= x:
+            l, r, real = cas[i]
+            if r >= x: 
+                heapq.heappush(maxHeap, -real)
+            i += 1
         
-        while heap and heap[0][1] < curr:
-            heapq.heappop(heap)
-        
-        if not heap:
+        if not maxHeap: 
             break
-        
-        reali, _ = heapq.heappop(heap)
-        curr = -reali
+            
+        best = -heapq.heappop(maxHeap)
+        if best <= x: 
+            break
+        x = best
+    
+    print(x)
 
-    print(curr)
+

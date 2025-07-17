@@ -15,7 +15,7 @@ for _ in range(int(input())):
     while True:
         best  =-1
         bestIndex = -1
-        
+
         for i in range(n):
             if not vis[i]:
                 l,r,real = cas[i]
@@ -25,7 +25,6 @@ for _ in range(int(input())):
                         bestIndex = i
         if bestIndex == -1:
             break
-        
         vis[bestIndex] = 1
         curr = best
     print(curr)

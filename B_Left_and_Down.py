@@ -6,8 +6,9 @@ import sys
 
 for _ in range(int(input())):
     a, b, k = map(int, input().split())
-
-    if max(a, b) <= k:
+    g = math.gcd(a, b)
+    mn = max(a// k, b // k)
+    if g> mn:
         print(1)
     else:
         print(2)

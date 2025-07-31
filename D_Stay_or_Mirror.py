@@ -18,7 +18,7 @@ for _ in range(int(input())):
                 inv1[j]+=1
     ans=x
     for i in range(n):
-        Ai=(n-1-i - inv2[i]) - inv1[i]
-        if Ai<0:
-            ans+=Ai
+        res=(n-1-i - inv2[i]) - inv1[i]
+        if res<0:
+            ans+=res
     print(ans, ) 

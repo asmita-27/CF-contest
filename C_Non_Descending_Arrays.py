@@ -5,7 +5,7 @@ import sys
 
 MOD = 998244353
 
-def solve_case(a, b):
+def solve(a, b):
     n = len(a)
     v0, v1 = 1, 1
     for i in range(1, n):
@@ -26,4 +26,4 @@ for _ in range(t):
     n = int(input().strip())
     a = list(map(int, input().split()))
     b = list(map(int, input().split()))
-    print(solve_case(a, b))
+    print(solve(a, b))

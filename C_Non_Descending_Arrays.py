@@ -4,28 +4,26 @@ import math
 import sys
 
 MOD = 998244353
-for _ in range(int(input())):
-    n = int(input())
+
+def solve_case(a, b):
+    n = len(a)
+    v0, v1 = 1, 1
+    for i in range(1, n):
+        M00 = 1 if (a[i-1] <= a[i] and b[i-1] <= b[i]) else 0
+        M01 = 1 if (a[i-1] <= b[i] and b[i-1] <= a[i]) else 0
+        M10 = 1 if (b[i-1] <= a[i] and a[i-1] <= b[i]) else 0
+        M11 = 1 if (b[i-1] <= b[i] and a[i-1] <= a[i]) else 0
+
+        nv0 = (v0 * M00 + v1 * M10) % MOD
+        nv1 = (v0 * M01 + v1 * M11) % MOD
+        v0, v1 = nv0, nv1
+
+    return (v0 + v1) % MOD
+import sys
+input = sys.stdin.readline
+t = int(input().strip())
+for _ in range(t):
+    n = int(input().strip())
     a = list(map(int, input().split()))
     b = list(map(int, input().split()))
-
-    blocks = []
-    start = 0
-    max_a, max_b = a[0], b[0]
-
-    for i in range(n):
-        max_a = max(max_a, a[i])
-        max_b = max(max_b, b[i])
-
-        # If next element breaks order, close block
-        if i == n-1 or (min(a[i+1], b[i+1]) < max_a or min(a[i+1], b[i+1]) < max_b):
-            blocks.append(i - start + 1)
-            start = i+1
-            if start < n:
-                max_a, max_b = a[start], b[start]
-
-    ans = 1
-    for length in blocks:
-        ans = ans * pow(2, length, MOD) % MOD
-
-    print(ans)
+    print(solve_case(a, b))

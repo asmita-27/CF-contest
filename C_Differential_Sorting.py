@@ -10,6 +10,12 @@ for _ in range(int(input())):
     if a[n-2] > a[n-1]:
         print(-1)
     else:
-        print(n-2)
-        for i in range(1, n-1):
-            print(i, i+1, n)
+        if a[n-1] < 0:
+            if all(a[i] <= a[i+1] for i in range(n-1)):
+                print(0)
+            else:
+                print(-1)
+        else:
+            print(n-2)
+            for i in range(1, n-1):  
+                print(i, n-1, n)

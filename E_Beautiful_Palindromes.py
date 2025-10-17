@@ -5,22 +5,14 @@ for _ in range(int(input())):
     res = []
     
     for _ in range(k):
-        lst = a[-1]
-        sec = a[-2] if len(a) >= 2 else -1
+        last1 = a[-1] if len(a) >= 1 else 0
+        last2 = a[-2] if len(a) >= 2 else 0
         
-        x = -1
-        for val in range(1, min(4, n + 1)):
-            if val != lst and val != sec:
-                x = val
+        for val in range(1, n + 1):
+            if val != last1 and val != last2:
+                res.append(val)
+                a.append(val)
                 break
-        if x == -1:
-            for val in range(1, n + 1):
-                if val != lst and val != sec:
-                    x = val
-                    break
-        
-        res.append(x)
-        a.append(x)
     
     print(' '.join(map(str, res)))
 

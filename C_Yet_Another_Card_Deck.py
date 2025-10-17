@@ -4,10 +4,20 @@ import math
 import sys
 
 
-n,k = map(int, input().split())
+n, q = map(int, input().split())
 a = list(map(int, input().split()))
 q = list(map(int, input().split()))
-for c in range(k):
-    p = a.index(q[c])
-    print(p + 1, end=' ')
-    a = [a[p]] + a[:p] + a[p+1:]
+  
+pos = {}
+for i, color in enumerate(a):
+    if color not in pos:
+        pos[color] = i + 1 
+
+for t in q:
+    p = pos[t]
+    print(p, end=' ')
+     
+    for c in pos:
+        if pos[c] < p:
+            pos[c] += 1
+    pos[t] = 1

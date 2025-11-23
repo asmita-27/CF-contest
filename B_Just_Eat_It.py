@@ -20,5 +20,4 @@ for _ in range(int(input())):
             if s <= 0:
                 ok = False
                 break
-
     print("YES" if ok else "NO")

@@ -15,6 +15,6 @@ for _ in range(int(input())):
         if ptr < m and c[ptr] <c[i-1]:
             tot += c[ptr]
             ptr += 1
-        else:  
+        else:
             tot += c[i-1]
     print(tot)

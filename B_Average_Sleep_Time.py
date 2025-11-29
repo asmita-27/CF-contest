@@ -3,7 +3,7 @@ import os
 import math
 import sys
 
-   
+
 n, k = map(int, input().split())
 a = list(map(int, input().split()))
 pref = [0]*(n+1)

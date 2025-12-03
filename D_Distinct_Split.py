@@ -10,7 +10,7 @@ for _ in range(int(input())):
     cnt = [0]*26
     p = [0] *26
     for ch in s:
-        cnt[ord(ch)-97] += 1
+        cnt[ord(ch)-ord("a")] += 1
     ans = 0
     for i in s:
         idx = ord(i)-97

@@ -4,18 +4,20 @@ import math
 import sys
 
 
-
-
 n, D = map(int, input().split())
 P = sorted(map(int, input().split()))
 
 wins = 0
-team = []
+used = 0
+i = n - 1
 
-for p in P:  
-    team.append(p)
-    if team[-1] * len(team) > D:
-        wins += 1
-        team = []
+while i >= 0:
+    x = P[i]
+    need = D // x + 1
+    if i + 1 - used < need:
+        break
+    used += need
+    wins += 1
+    i -= 1
 
 print(wins)

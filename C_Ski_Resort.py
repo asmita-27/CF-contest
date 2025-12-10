@@ -5,8 +5,8 @@ import sys
 
 
 for _ in range(int(input())):
-    n, k, q = map(int, input().split(' '))
-    a = list(map(int, input().split(' ')))
+    n, k, q = map(int, input().split())
+    a = list(map(int, input().split()))
     ans = 0
     len = 0
     for i in range(n):

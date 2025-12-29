@@ -3,22 +3,19 @@ import os
 import math
 import sys
 n = int(input())
-a = list(map(lambda x: int(x) - 1, input().split()))
-b = list(map(lambda x: int(x) - 1, input().split()))
+a = list(map(int, input().split()))
+b = list(map(int, input().split()))
 
-pos = [0] * n
+pos = {}
 for i in range(n):
     pos[b[i]] = i
-
-c = [0] * n
-for i in range(n):
-    c[i] = pos[a[i]]
 
 mx = -1
 ans = 0
 for i in range(n):
-    if c[i] > mx:
-        mx = c[i]
+    curr = pos[a[i]]
+    if curr > mx:
+        mx = curr
     else:
         ans += 1
 

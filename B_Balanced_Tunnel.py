@@ -3,17 +3,23 @@ import os
 import math
 import sys
 n = int(input())
-a = list(map(int, input().split()))
-b = list(map(int, input().split()))
+a = list(map(lambda x: int(x) - 1, input().split()))
+b = list(map(lambda x: int(x) - 1, input().split()))
 
-pos = [0]* n
+pos = [0] * n
 for i in range(n):
-    pos[b[i]]= i
+    pos[b[i]] = i
 
-c = [0]* n
+c = [0] * n
 for i in range(n):
-    c[i]= pos[a[i]]
+    c[i] = pos[a[i]]
 
 mx = -1
-ans =0
-for 
+ans = 0
+for i in range(n):
+    if c[i] > mx:
+        mx = c[i]
+    else:
+        ans += 1
+
+print(ans)

@@ -3,36 +3,24 @@ import os
 import math
 import sys
 
-
+from itertools import product
 
 for _ in range(int(input())):
-    pass
-    n = int(input())
+    n = int(input().strip())
     s = input().strip()
-    Sset = set()
+
+    se = set() 
     for i in range(n):
-        ss = ''
-        for j in range(5):
-            if i+j < n:
-                ss += s[i+j]
-                Sset.add(ss)
+        for l in range(1, 6):
+            if i + l <= n:
+                se.add(s[i:i+l])
+ 
     for length in range(1, 6):
-        t = ["a"] * length
-        while True:
-            ts = "".join(t)
-            if ts not in Sset:
-                print(ts)
+        for p in product('abcdefghijklmnopqrstuvwxyz', repeat=length):
+            t = ''.join(p)
+            if t not in se:
+                print(t)
                 break
-
-            idx = length - 1
-            while idx >= 0 and t[idx] == 'z':
-                t[idx] = 'a'
-                idx -= 1
-            if idx < 0:
-                break
-            t[idx] = chr(ord(t[idx]) + 1)
-
         else:
-            continue
+            continue    
         break
-    

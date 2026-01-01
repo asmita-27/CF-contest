@@ -11,7 +11,6 @@ for _ in range(int(input())):
     if y == 0 and r == 0:
         print(0)
         continue
- 
     if y // 2 >= r: 
         ans += y // 2 
         n -= y // 2 

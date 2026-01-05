@@ -9,7 +9,7 @@ for _ in range(int(input())):
     a = list(map(int, input().split()))
     x = int(input())
     
-    if max(a)<x:
+    if max(a)<x or min(a)>x:
         print("NO")
     else:
         print("YES")

@@ -13,22 +13,28 @@ def solve():
             adj[u].append(v)
             adj[v].append(u)
 
-        # BFS to compute depth counts
+        # BFS to compute depths
         depth_count = defaultdict(int)
         visited = [False] * (n + 1)
-        q = deque()
-        q.append((1, 0))  # (node, depth)
+
+        q = deque([(1, 0)])
         visited[1] = True
 
         while q:
-            node, depth = q.popleft()
-            depth_count[depth] += 1
-            for nei in adj[node]:
-                if not visited[nei]:
-                    visited[nei] = True
-                    q.append((nei, depth + 1))
+            node, d = q.popleft()
+            depth_count[d] += 1
+            for nxt in adj[node]:
+                if not visited[nxt]:
+                    visited[nxt] = True
+                    q.append((nxt, d + 1))
 
-        print(max(depth_count.values()))
+        max_depth = max(depth_count.keys())
+        ans = depth_count[0]  # root alone case
+
+        for d in range(1, max_depth + 1):
+            ans = max(ans, depth_count[d] + depth_count[d - 1])
+
+        print(ans)
 
 if __name__ == "__main__":
     solve()

@@ -3,34 +3,19 @@ input = sys.stdin.readline
 
 for _ in range(int(input())):
     n, k = map(int, input().split())
-    a = list(map(int, input().split()))
+    arr = list(map(int, input().split()))
+    
+    mp = {}
+    for x in arr:
+        mp[x] = mp.get(x, 0) + 1
 
-    freq = [0] * (k + 1)
-    miss = set(range(k + 1))
-
-    # first window
+    ans = -1
     for i in range(k):
-        if a[i] <= k:
-            freq[a[i]] += 1
-            if freq[a[i]] == 1:
-                miss.discard(a[i])
+        if i not in mp:
+            ans = i
+            break
 
-    maxMex = (k + 1) if not miss else min(miss)
- 
-    for i in range(k, n):
-        out = a[i - k]
-        if out <= k:
-            freq[out] -= 1
-            if freq[out] == 0:
-                miss.add(out)
-
-        inn = a[i]
-        if inn <= k:
-            freq[inn] += 1
-            if freq[inn] == 1:
-                miss.discard(inn)
-
-        curMex = (k + 1) if not miss else min(miss)
-        maxMex = max(maxMex, curMex)
-
-    print(min(maxMex, k - 1))
+    if ans == -1:
+        print(k - 1)
+    else:
+        print(ans)

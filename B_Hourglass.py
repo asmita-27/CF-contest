@@ -6,12 +6,9 @@ import sys
 
 for _ in range(int(input())):
     s, k, m = map(int, input().split())
-    lastFlip = (m // k) * k 
-    after = min(s, k)
-    x = m - lastFlip
-    rem = after - x
+    r = m % k
 
-    if rem < 0:
-        rem = 0
-
-    print(rem)
+    if s <= k:
+        print(max(0, s - r))
+    else:
+        print(max(0, k - r))

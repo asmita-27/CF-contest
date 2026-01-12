@@ -8,8 +8,8 @@ for _ in range(int(input())):
     s, k, m = map(int, input().split())
     lastFlip = (m // k) * k 
     after = min(s, k)
-    elapsed = m - lastFlip
-    rem = after - elapsed
+    x = m - lastFlip
+    rem = after - x
 
     if rem < 0:
         rem = 0

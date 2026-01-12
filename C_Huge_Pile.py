@@ -10,19 +10,19 @@ for _ in range(int(input())):
     if k > n:
         print(-1)
         continue
+
     time = 0
     x = n
+
     while x > k:
-        a = x // 2
-        b = x - a
-        if a >= k:
-            x = a
-        elif b >= k:
-            x = b
+        half = x // 2
+
+        if k > half:
+            x = x - half     
         else:
-            time = -1
-            break
-
+            x = half   
         time += 1
-
-    print(time)
+    if x == k:
+        print(time)
+    else:
+        print(-1)

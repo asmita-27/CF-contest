@@ -6,9 +6,12 @@ import sys
 
 for _ in range(int(input())):
     s, k, m = map(int, input().split())
-    r = m % k
-
+    idx = m // k
+    L = idx * k
+    d = m - L
     if s <= k:
-        print(max(0, s - r))
+        r_last = s
     else:
-        print(max(0, k - r))
+        r_last = s if (idx % 2 == 0) else k
+    ans = max(0, r_last - d)
+    print(ans)

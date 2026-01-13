@@ -6,25 +6,37 @@ import sys
 def main():
     n, k = map(int, input().split())
 
-    if n==k:
+    if n == k:
         print(0)
-    cnt =0
-    flg = False
-    if n&1 :
-        flg = True
-    while n >= k:
-        if n & 1:
-            flg = True
-        n //= 2
-        cnt += 1
-        if n == k:
-            print(cnt)
-            return
-        if flg:
-            if n + 1 == k:
-                print(cnt)
-                return
-    print(-1)
+        return
 
+    s = {n}
+    m = 0
+
+    while s:
+        m += 1
+        nxt = set()
+        ok = False
+        for x in s:
+            if x < 2:
+                continue
+            a = x // 2
+            b = (x + 1) // 2
+            if a == k or b == k:
+                ok = True
+                break
+            if a > k:
+                nxt.add(a)
+            if b > k:
+                nxt.add(b)
+        if ok:
+            print(m)
+            return
+        if not nxt:
+            break
+        s = nxt
+    print(-1)
+    
+    
 for _ in range(int(input())):
     main()

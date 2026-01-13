@@ -15,10 +15,8 @@ def main():
     while n >= k:
         if n & 1:
             flg = True
-
         n //= 2
         cnt += 1
-
         if n == k:
             print(cnt)
             return

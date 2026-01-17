@@ -5,21 +5,23 @@ import sys
 
 n  = int(input())
 adj = [[] for _ in range(n + 1)]
+lev = [0] * (n + 1)
 
 for i in range(n - 1):
     u, v = map(int, input().split())
     adj[u].append(v)
     adj[v].append(u)
 
-col = [-1]*(n+1)
-cnt =[0,0]
+def dfs(x, hi, pa):
+    lev[x] = hi
+    for v in adj[x]:
+        if v == pa:
+            continue
+        dfs(v, hi + 1, x)
 
-def dfs(u,c):
-    col[u] = c
-    cnt[c]+=1
-    for v in adj[u]:
-        if col[v]==-1:
-            dfs(v, 1-c)
-dfs(1,0)
-ans = cnt[0] * cnt[1] - (n - 1)
-print(ans)
+dfs(1, 0, -1)
+odd = 0
+for i in range(1, n + 1):
+    if lev[i] % 2 == 1:
+        odd += 1 
+print(odd * (n - odd) - (n - 1))

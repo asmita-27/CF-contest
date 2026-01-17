@@ -1,27 +1,34 @@
-from collections import defaultdict, Counter, deque
-import os
-import math
 import sys
+from collections import deque
 
-n  = int(input())
+input = sys.stdin.buffer.readline
+
+n = int(input())
 adj = [[] for _ in range(n + 1)]
-lev = [0] * (n + 1)
 
-for i in range(n - 1):
+for _ in range(n - 1):
     u, v = map(int, input().split())
     adj[u].append(v)
     adj[v].append(u)
 
-def dfs(x, hi, pa):
-    lev[x] = hi
-    for v in adj[x]:
-        if v == pa:
-            continue
-        dfs(v, hi + 1, x)
+color = [-1] * (n + 1)
 
-dfs(1, 0, -1)
-odd = 0
-for i in range(1, n + 1):
-    if lev[i] % 2 == 1:
-        odd += 1 
-print(odd * (n - odd) - (n - 1))
+q = deque([1])
+color[1] = 0
+
+c0 = 1
+c1 = 0
+
+while q:
+    u = q.popleft()
+    cu = color[u]
+    for v in adj[u]:
+        if color[v] == -1:
+            color[v] = 1 - cu
+            if color[v] == 0:
+                c0 += 1
+            else:
+                c1 += 1
+            q.append(v)
+
+print(c0 * c1 - (n - 1))

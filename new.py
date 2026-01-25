@@ -1,19 +1,20 @@
-n = int(input())
-data = []
+# n = int(input())
+data = [("T1","OPEN"),("T2","COMMENT"),("T1","CLOSE"),("T3","CLOSE"),("T2","CLOSE")]
 
-for _ in range(n):
-    ticketId, action = input().split()
-    data.append((ticketId, action))
-    openTicket =set()
-    invalidTickets = set()
-    
-    for ticketId, action in data:
-        if action =="open":
-            openTicket.add(ticketId)
-        elif action=="close":
-            if ticketId in openTicket:
-                openTicket.remove(ticketId)
-            else:
-                invalidTickets.add(ticketId)
-    
-    print(invalidTickets)
+
+def find_invalid_tickets(events):
+    opened = set()
+    invalid = set()
+
+    for ticket_id, action in events:
+        if action == "OPEN":
+            opened.add(ticket_id)
+        elif action == "CLOSE":
+            if ticket_id not in opened:
+                invalid.add(ticket_id)
+        # COMMENT is ignored
+
+    return list(invalid)
+
+invalid_tickets = find_invalid_tickets(data)
+print(invalid_tickets)

@@ -9,12 +9,11 @@ for _ in range(int(input())):
         print(-1)
         continue
 
-    mn = a[-1]
-    ans = 10**18
-
-    for i in range(n - 2, -1, -1):
-        if a[i] > mn:
-            ans = min(ans, a[i] - mn)
-        mn = min(mn, a[i])
-
+    mn, mx = min(a), max(a)
+    unique_vals = set(a)
+    
+    ans = float('inf')
+    for v in unique_vals:
+        ans = min(ans, max(v - mn, mx - v))
+    
     print(ans)

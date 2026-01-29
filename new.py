@@ -1,20 +1,33 @@
-# n = int(input())
-data = [("T1","OPEN"),("T2","COMMENT"),("T1","CLOSE"),("T3","CLOSE"),("T2","CLOSE")]
-
-
 def find_invalid_tickets(events):
-    opened = set()
+    NEW = "NEW"
+    OPEN = "OPEN"
+    CLOSED = "CLOSED"
+
+    state = {}     
     invalid = set()
 
     for ticket_id, action in events:
+        curr = state.get(ticket_id, NEW)
+
         if action == "OPEN":
-            opened.add(ticket_id)
-        elif action == "CLOSE":
-            if ticket_id not in opened:
+            if curr != NEW:
                 invalid.add(ticket_id)
-        # COMMENT is ignored
+            else:
+                state[ticket_id] = OPEN
+
+        elif action == "CLOSE":
+            if curr != OPEN:
+                invalid.add(ticket_id)
+            else:
+                state[ticket_id] = CLOSED
+
+        elif action == "REOPEN":
+            if curr != CLOSED:
+                invalid.add(ticket_id)
+            else:
+                state[ticket_id] = OPEN
+
+        elif action == "COMMENT": 
+            continue
 
     return list(invalid)
-
-invalid_tickets = find_invalid_tickets(data)
-print(invalid_tickets)

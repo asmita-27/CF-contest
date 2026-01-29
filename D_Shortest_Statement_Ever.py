@@ -1,19 +1,18 @@
 import sys
 input = sys.stdin.readline
 
-t = int(input())
-for _ in range(t):
+for _ in range(int(input())):
     x, y = map(int, input().split())
 
-    a = x & y
+    p = x & ~y
+    while p < x and p & y:
+        p += p & -p
 
-    p1, q1 = x - a, y + a
-    p2, q2 = x + a, y - a
+    q = y & ~x
+    while q < y and q & x:
+        q += q & -q
 
-    cost1 = abs(x - p1) + abs(y - q1)
-    cost2 = abs(x - p2) + abs(y - q2)
-
-    if cost1 <= cost2:
-        print(p1, q1)
+    if abs(x - p) <= abs(y - q):
+        print(p, y)
     else:
-        print(p2, q2)
+        print(x, q)

@@ -11,7 +11,7 @@ for _ in range(t):
     
     p [n] = n
     p[n-1] = 1
-    vis[n] = vis[n] = True
+    vis[n] = vis[n] = True  
     
     for i in range(n-2, 0, -1):
         if p[i+1]+i<=n and not vis[p[i+1]+i]:

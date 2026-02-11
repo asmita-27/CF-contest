@@ -1,20 +1,23 @@
+from collections import defaultdict, Counter, deque
+import os
+import math
 import sys
-input = sys.stdin.readline
 
-t = int(input())
-for _ in range(t):
+
+for _ in range(int(input())):
     n = int(input())
     p = list(map(int, input().split()))
     a = list(map(int, input().split()))
-    
-    possible = True
-    
+    flg = True
     for i in range(n):
-        if a[i] != p[i]:
-            left_ok = (i > 0 and a[i] == a[i-1])
-            right_ok = (i < n-1 and a[i] == a[i+1])
-            if not left_ok and not right_ok:
-                possible = False
-                break
-    
-    print("YES" if possible else "NO")
+        if a[i] == p[i]:
+            continue
+        ok = False
+        if i > 0 and p[i-1] == a[i]:
+            ok = True
+        if i < n-1 and p[i+1] == a[i]:
+            ok = True
+        if not ok:
+            flg = False
+            break
+    print("YES" if flg else "NO")

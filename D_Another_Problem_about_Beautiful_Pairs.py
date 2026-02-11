@@ -8,11 +8,15 @@ import sys
 for _ in range(int(input())):
     n = int(input())
     a = [0] + list(map(int, input().split()))
-    cnt = 0
-    for i in range(1, n+1):
-        k = a[i]
-        for j in range(k, n - i + 1, k):
-            x = i + j
-            if a[x] == j // k:
-                cnt += 1
-    print(cnt)
+    ans = 0
+    
+    for i in range(1, n + 1):
+        ai = a[i] 
+        j = i + ai
+        
+        while j <= n:
+            if a[j] * ai == j - i:
+                ans += 1
+            j += ai
+    
+    print(ans)

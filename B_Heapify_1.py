@@ -6,16 +6,20 @@ import sys
 
 for _ in range(int(input())):
     n = int(input())
-    a = list(map(int,input().split()))
-    cpy = sorted(a)
-    x = []
-    for i in range(n):
-        if a[i] != cpy[i]:
-            x.append(i)
-    n = len(x) 
-    if n== 0:
-        print("YES")
-    elif n%2==0 and n>=2:
+    a =[0]+ list(map(int,input().split()))
+    i = 1
+    while i<=n:
+        j = i
+        while j<=n:
+            k = i*2
+            while k<=n:
+                if a[k//2]>a[k]:
+                    a[k//2],a[k] = a[k],a[k//2]
+                k*=2
+            j*=2
+        i+=2
+
+    if a[1:]==sorted(a[1:]):
         print("YES")
     else:
         print("NO")

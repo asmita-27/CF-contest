@@ -9,10 +9,8 @@ for _ in range(int(input())):
     s = input() 
     o = [i+1 for i,ch in enumerate(s) if ch=='1']
     z = [i+1 for i,ch in enumerate(s) if ch=='0']
-    
     cnt1 = len(o)
     cnt0 = len(z)
-    
     if cnt1 % 2 == 0:
         print(cnt1)
         if cnt1:

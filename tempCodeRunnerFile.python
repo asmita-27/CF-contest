@@ -1,0 +1,67 @@
+from collections import defaultdict
+
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.is_word = False
+
+class WhatsAppSearch:
+    def __init__(self):
+        self.messages = {}                  # id -> message
+        self.word_index = defaultdict(list) # word -> list of message ids
+        self.root = TrieNode()
+        self.msg_id = 0
+
+    # Insert word into Trie
+    def insert_word(self, word):
+        curr = self.root
+        for ch in word:
+            if ch not in curr.children:
+                curr.children[ch] = TrieNode()
+            curr = curr.children[ch]
+        curr.is_word = True
+
+    # Insert new message
+    def insert_message(self, text):
+        self.messages[self.msg_id] = text
+        words = text.lower().split()
+
+        for w in words:
+            self.word_index[w].append(self.msg_id)
+            self.insert_word(w)
+
+        self.msg_id += 1
+
+    # Search by keyword
+    def search(self, word):
+        result = []
+        for msg_id in self.word_index.get(word.lower(), []):
+            result.append(self.messages[msg_id])
+        return result
+
+    # DFS for autocomplete
+    def dfs(self, node, prefix, result):
+        if node.is_word:
+            result.append(prefix)
+        for ch in node.children:
+            self.dfs(node.children[ch], prefix + ch, result)
+
+    # Autocomplete suggestions
+    def autocomplete(self, prefix):
+        curr = self.root
+        for ch in prefix:
+            if ch not in curr.children:
+                return []
+            curr = curr.children[ch]
+
+        result = []
+        self.dfs(curr, prefix, result)
+        return result
+wa = WhatsAppSearch()
+
+wa.insert_message("hello how are you")
+wa.insert_message("hello buddy")
+wa.insert_message("good morning")
+
+print("Search 'hello':", wa.search("hello"))
+print("Autocomplete 'he':", wa.autocomplete("he"))

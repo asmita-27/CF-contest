@@ -1,32 +1,48 @@
-from collections import defaultdict, Counter, deque
-import os
-import math
-import sys
-
-
 for _ in range(int(input())):
     n = int(input())
     a = list(map(int, input().split()))
-    pos = [0]*(n+1)
-    for i,x in enumerate(a):
-        pos[x] = i
-    stk = [(0, n-1)]
+
+    left = [-1]*n
+    right = [-1]*n
+    parent = [-1]*n
+    st = []
+    
+    for i in range(n):
+        last = -1
+        while st and a[st[-1]] < a[i]:
+            last = st.pop()
+        if st:
+            right[st[-1]] = i
+            parent[i] = st[-1]
+        if last != -1:
+            left[i] = last
+            parent[last] = i
+        st.append(i)
+    
+    root = parent.index(-1) 
+    stk = [root]
     ans = 0
+    
     while stk:
-        l, r = stk.pop()
-        if l >= r:
-            continue
-        for val in range(n,0,-1):
-            p = pos[val]
-            if l <= p <= r:
-                mx = p
-                break
-        lft = mx - l
-        rgt = r - mx
-        ans += min(lft, rgt)
-        if lft > rgt:
-            stk.append((l, mx-1))
-        else:
-            stk.append((mx+1, r))
+        mx = stk.pop()
+        
+        lft = 0 if left[mx] == -1 else 1
+        rgt = 0 if right[mx] == -1 else 1
+         
+        def size(v):
+            if v == -1: return 0
+            s = 1
+            if left[v] != -1: s += size(left[v])
+            if right[v] != -1: s += size(right[v])
+            return s
+        
+        lft = size(left[mx])
+        rgt = size(right[mx])
+        
+        ans += min(lft, rgt) 
+        if lft > rgt and left[mx] != -1:
+            stk.append(left[mx])
+        elif right[mx] != -1:
+            stk.append(right[mx])
     
     print(ans)

@@ -1,28 +1,46 @@
-from collections import defaultdict, Counter, deque
-import os
-import math
 import sys
+input = sys.stdin.readline
 
-MX = 10**6
-spf = list(range(MX+1))
-for i in range(2, int(MX**0.5)+1):
-    if spf[i] == i:
-        for j in range(i*i, MX+1, i):
-            if spf[j] == j:
+MAX = 10**6
+spf = [0]*(MAX+1)
+isPrPow = [True]*(MAX+1)
+for i in range(2, MAX+1):
+    if spf[i] == 0:
+        for j in range(i, MAX+1, i):
+            if spf[j] == 0:
                 spf[j] = i
+for x in range(2, MAX+1):
+    y = x
+    p = spf[x]
+    while y % p == 0:
+        y //= p
+    if y != 1:
+        isPrPow[x] = False
+
 
 for _ in range(int(input())):
     n = int(input())
     a = list(map(int, input().split()))
-    def isPrPow(x):
+    def nonDec(a):
+        for i in range(len(a)-1):
+            if a[i] > a[i+1]:
+                return False
+        return True
+    if nonDec(a):
+        print("Bob")
+        continue
+    allPrPow = True
+    prevPrime = -1
+    flg = True
+    for x in a:
+        if not isPrPow[x]:
+            allPrPow = False
         p = spf[x]
-        while x % p == 0:
-            x //= p
-        return x == 1
-    res = "Bob"
-    for i in range(n-1):
-        if a[i] > a[i+1]:
-            if not isPrPow(a[i]):
-                res = "Alice"
-            break
-    print(res)
+        if prevPrime > p:
+            flg = False
+        prevPrime = p
+
+    if allPrPow and flg:
+        print("Bob")
+    else:
+        print("Alice")

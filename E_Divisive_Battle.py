@@ -16,8 +16,6 @@ for x in range(2, MAX+1):
         y //= p
     if y != 1:
         isPrPow[x] = False
-
-
 for _ in range(int(input())):
     n = int(input())
     a = list(map(int, input().split()))

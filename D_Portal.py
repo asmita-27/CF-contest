@@ -25,8 +25,7 @@ for _ in range(t):
         if l <= r:
             candidates.append(("front", mid[l]))
             candidates.append(("back", mid[r]))
-        
-        # pick smallest available
+
         src, val = min(candidates, key=lambda x: x[1])
         ans.append(val)
         

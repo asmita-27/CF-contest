@@ -7,18 +7,23 @@ import sys
 for _ in range(int(input())):
     a, n = map(int, input().split())
     d = input().split()
-    res = 10**18
-    s = str(a)
-    def f(cur, l):
-        if len(cur) == l:
-            if len(cur) > 1 and cur[0] == '0':
-                return 10**18
-            return abs(a - int(cur))
-        best = 10**18
-        for i in d:
-            best = min(best, f(cur + i, l))
-        return best
-    for l in range(1, len(s) + 2):
-        res = min(res, f("", l))
 
-    print(res)
+    x, y = d[0], d[1]
+
+    l = len(str(a))
+    ans = float('inf')
+    for lng in range(max(1, l - 1), l + 2):
+        tot = 1 << lng
+        for msk in range(tot):
+            s = []
+            for i in range(lng):
+                if (msk >> i) & 1:
+                    s.append(y)
+                else:
+                    s.append(x)
+            if lng > 1 and s[0] == '0':
+                continue
+            num = int("".join(s))
+            ans = min(ans, abs(a - num))
+
+    print(ans)

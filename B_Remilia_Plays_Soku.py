@@ -6,6 +6,10 @@ import sys
 
 for _ in range(int(input())):
     n, x1, x2, k = map(int, input().split())
-    d = abs(x1 - x2)
-    d = min(d, n - d)
-    print(d + k)
+
+    if n <= 3:
+        print(1)
+    else:
+        diff = abs(x1 - x2)
+        d = min(diff, n - diff)
+        print(d + k)

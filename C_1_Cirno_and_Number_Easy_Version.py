@@ -7,9 +7,7 @@ import sys
 for _ in range(int(input())):
     a, n = map(int, input().split())
     d = input().split()
-
     x, y = d[0], d[1]
-
     l = len(str(a))
     ans = float('inf')
     for lng in range(max(1, l - 1), l + 2):

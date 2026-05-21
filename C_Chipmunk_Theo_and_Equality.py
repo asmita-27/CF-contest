@@ -7,8 +7,8 @@ import sys
 for _ in range(int(input())):
     n = int(input())
     a = list(map(int, input().split()))
-    freq = defaultdict(int)
-    cost = defaultdict(int)
+    fre = defaultdict(int)
+    cst = defaultdict(int)
     for x in a:
         dist = {}
         step = 0
@@ -21,11 +21,11 @@ for _ in range(int(input())):
                 cur //= 2
             step += 1
         for v, c in dist.items():
-            freq[v] += 1
-            cost[v] += c
+            fre[v] += 1
+            cst[v] += c
     ans = float('inf')
-    for v in freq:
-        if freq[v] == n:
-            ans = min(ans, cost[v])
+    for v in fre:
+        if fre[v] == n:
+            ans = min(ans, cst[v])
 
     print(ans)

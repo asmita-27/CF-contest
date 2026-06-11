@@ -7,12 +7,12 @@ import sys
 for _ in range(int(input())):
     n = int(input())
     a = list(map(int, input().split()))
-    x = 0
+    y = 0
     ans = []
     for i in reversed(range(n)):
-        x = -a[i] if x else a[i]
+        x = -a[i] if y else a[i]
         if x > 0:
             ans.append(i)
-            x ^= 1
+            y ^= 1
     print(len(ans))
     print(*(i + 1 for i in ans))

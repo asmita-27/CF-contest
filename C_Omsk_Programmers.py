@@ -39,5 +39,4 @@ for _ in range(int(input())):
             c = sa + sb + abs(va - vb)
             if c < ans:
                 ans = c
-
     print(ans)
